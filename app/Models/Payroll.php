@@ -9,4 +9,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Payroll extends Model
 {
      use HasFactory, SoftDeletes;
+
+     protected $fillable = [
+          'employee_id',
+          'salary',
+          'bonus',
+          'deductions',
+          'net_pay',
+          'pay_date',
+     ];
+
+     public function employee()
+     {
+          return $this->belongsTo(Employee::class, 'employee_id');
+     }
 }

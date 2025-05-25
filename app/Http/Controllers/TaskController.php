@@ -25,9 +25,9 @@ class TaskController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'assigned_to' => 'required',
-            'due_date' => 'required|date',
-            'status' => 'required|string'
+            'assigned_to' => 'required|exists:employees,id',
+            'due_date' => 'required|date|after_or_equal:today',
+            'status' => 'required|in:pending,in_progress,done',
         ]);
 
         Task::create($validated);
@@ -51,9 +51,9 @@ class TaskController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'assigned_to' => 'required',
-            'due_date' => 'required|date',
-            'status' => 'required|string'
+            'assigned_to' => 'required|exists:employees,id',
+            'due_date' => 'required|date|after_or_equal:today',
+            'status' => 'required|in:pending,in_progress,done',
         ]);
 
         $task->update($validated);

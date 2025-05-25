@@ -118,35 +118,38 @@
                             </a>
                         </li>
 
-
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'presences.') ? 'active' : '' }}">
+                            <a href="{{ route('presences.index') }}" class="sidebar-link">
                                 <i class="bi bi-table"></i>
                                 <span>Presences</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'payrolls.') ? 'active' : '' }}">
+                            <a href="{{ route('payrolls.index') }}" class="sidebar-link">
                                 <i class="bi bi-currency-dollar"></i>
                                 <span>Payrolls</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'leaves.') ? 'active' : '' }}">
+                            <a href="{{ route('leaves.index') }}" class="sidebar-link">
                                 <i class="bi bi-shift-fill"></i>
                                 <span>Leave Request</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="{{ route('logout') }}" class="sidebar-link"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Logout</span>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
                         </li>
-
                     </ul>
                 </div>
             </div>
