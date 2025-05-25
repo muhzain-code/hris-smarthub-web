@@ -34,52 +34,52 @@
 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Fullname:</strong></label>
+                        <label class="form-label"><strong>Fullname</strong></label>
                         <p>{{ $employee->fullname }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Email:</strong></label>
+                        <label class="form-label"><strong>Email</strong></label>
                         <p>{{ $employee->email }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Phone Number:</strong></label>
+                        <label class="form-label"><strong>Phone Number</strong></label>
                         <p>{{ $employee->phone_number }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Address:</strong></label>
+                        <label class="form-label"><strong>Address</strong></label>
                         <p>{{ $employee->address }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Birth Date:</strong></label>
+                        <label class="form-label"><strong>Birth Date</strong></label>
                         <p>{{ $employee->birth_date }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Hire Date:</strong></label>
+                        <label class="form-label"><strong>Hire Date</strong></label>
                         <p>{{ $employee->hire_date }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Department:</strong></label>
+                        <label class="form-label"><strong>Department</strong></label>
                         <p>{{ $employee->department->name }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Role:</strong></label>
+                        <label class="form-label"><strong>Role</strong></label>
                         <p>{{ $employee->role->title }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Salary:</strong></label>
+                        <label class="form-label"><strong>Salary</strong></label>
                         <p>{{ $employee->salary }}</p>
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label class="form-label"><strong>Status:</strong></label>
+                        <label class="form-label"><strong>Status</strong></label>
                         <p>{{ $employee->status }}</p>
                     </div>
                 </div>

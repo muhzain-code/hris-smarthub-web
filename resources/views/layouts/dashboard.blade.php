@@ -79,40 +79,45 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard') }}" class='sidebar-link'>
-                                <i class="bi bi-check-circle-fill"></i>
+                        @php
+                            $currentRoute = Route::currentRouteName();
+                        @endphp
+
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard') }}" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{ request()->routeIs('tasks.index') ? 'active' : '' }}">
-                            <a href="{{ route('tasks.index') }}" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'tasks.') ? 'active' : '' }}">
+                            <a href="{{ route('tasks.index') }}" class="sidebar-link">
                                 <i class="bi bi-check-circle-fill"></i>
                                 <span>Tasks</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{ request()->routeIs('employees.index') ? 'active' : '' }}">
-                            <a href="{{ route('employees.index') }}" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'employees.') ? 'active' : '' }}">
+                            <a href="{{ route('employees.index') }}" class="sidebar-link">
                                 <i class="bi bi-people-fill"></i>
                                 <span>Employees</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'departments.') ? 'active' : '' }}">
+                            <a href="{{ route('departments.index') }}" class="sidebar-link">
                                 <i class="bi bi-briefcase"></i>
                                 <span>Departments</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'roles.') ? 'active' : '' }}">
+                            <a href="{{ route('roles.index') }}" class="sidebar-link">
                                 <i class="bi bi-tag"></i>
                                 <span>Roles</span>
                             </a>
                         </li>
+
 
                         <li class="sidebar-item">
                             <a href="index.html" class='sidebar-link'>
@@ -153,13 +158,12 @@
             <footer>
                 <div class="footer clearfix mb-0 text-muted">
                     <div class="float-start">
-                        <p>&copy; 2025 This application was developed by <a href="https://your-website.com"
+                        <p>&copy; 2025 This application was developed by <a href="https://github.com/muhzain-code"
                                 target="_blank">Zain</a></p>
                     </div>
                     <div class="float-end text-end">
                         <p>
-                            Template by <a href="https://saugi.me" target="_blank">Saugi</a> —
-                            crafted with <span class="text-danger"><i class="bi bi-heart-fill icon-mid"></i></span>
+                            Template by <a href="https://saugi.me" target="_blank">Saugi</a>
                         </p>
                     </div>
                 </div>

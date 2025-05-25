@@ -11,13 +11,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Detail task</h3>
-                    <p class="text-subtitle text-muted">Detail task.</p>
+                    <h3>Detail department</h3>
+                    <p class="text-subtitle text-muted">Detail department.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('tasks.index') }}">Tasks</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('departments.index') }}">Departments</a></li>
                             <li class="breadcrumb-item active" aria-current="page">View</li>
                         </ol>
                     </nav>
@@ -32,26 +32,21 @@
                     @endif
 
                     <div class="mb-3">
-                        <label class="form-label"><strong>Title</strong></label>
-                        <p>{{ $task->title }}</p>
+                        <label class="form-label"><strong>Name</strong></label>
+                        <p>{{ $department->name }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Description</strong></label>
-                        <p>{{ $task->description }}</p>
+                        <p>{{ $department->description }}</p>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label"><strong>Status</strong></label>
-                        <p>{{ $task->status }}</p>
+                        <p>{{ $department->status }}</p>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label"><strong>Due Date</strong></label>
-                        <p>{{ $task->due_date }}</p>
-                    </div>
-
-                    <a href="{{ route('tasks.index') }}" class="btn btn-secondary me-2">
+                    <a href="{{ route('departments.index') }}" class="btn btn-secondary me-2">
                         <i class="bi bi-arrow-left"></i> Back to List
                     </a>
                 </div>
