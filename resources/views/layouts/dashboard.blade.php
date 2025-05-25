@@ -20,6 +20,13 @@
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/compiled/css/app-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('mazer/dist/assets/compiled/css/iconly.css') }}">
 
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -161,25 +168,35 @@
     </div>
     <script src="{{ asset('mazer/dist/assets/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
-
-
     <script src="{{ asset('mazer/dist/assets/compiled/js/app.js') }}"></script>
-
-
-
     <!-- Need: Apexcharts -->
     <script src="{{ asset('mazer/dist/assets/extensions/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/static/js/pages/dashboard.js') }}"></script>
-
     <script src="{{ asset('mazer/dist/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/static/js/pages/simple-datatables.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toast
+            var toastEl = document.getElementById('toast-success');
+            if (toastEl) {
+                var toast = new bootstrap.Toast(toastEl, {
+                    delay: 3000
+                });
+                toast.show();
+            }
+
+            // DataTable
+            $('#table1').DataTable();
+        });
+    </script>
+
+    <script>
         let dateTime = flatpickr('.datetime', {
             dateFormat: "Y-m-d H:i",
-            enableTime:true
+            enableTime: true
         })
     </script>
 

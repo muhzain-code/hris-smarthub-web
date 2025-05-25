@@ -1,4 +1,4 @@
-@extends('layouts.dashboard');
+@extends('layouts.dashboard')
 
 @section('content')
     <header class="mb-3">
@@ -30,13 +30,14 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item" aria-current="page">Tasks</li>
-                            <li class="breadcrumb-item active" aria-current="page">Index</li>
+                            <li class="breadcrumb-item">Tasks</li>
+                            <li class="breadcrumb-item active">Index</li>
                         </ol>
                     </nav>
                 </div>
             </div>
         </div>
+
         <section class="section">
             <div class="card">
                 <div class="card-body">
@@ -44,7 +45,9 @@
                         <h5 class="card-title">
                             Data Tasks
                         </h5>
-                        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 ms-auto">New Task</a>
+                        <a href="{{ route('tasks.create') }}" class="btn btn-primary mb-3 ms-auto">
+                            <i class="bi bi-plus-circle"></i> New Task
+                        </a>
                     </div>
 
                     <table class="table table-striped" id="table1">
@@ -52,7 +55,7 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Assigned To</th>
-                                <th>Due date</th>
+                                <th>Due Date</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
@@ -69,18 +72,34 @@
                                         @elseif ($task->status === 'done')
                                             <span class="text-success">{{ ucfirst($task->status) }}</span>
                                         @else
-                                            <div class="span text-danger">{{ ucfirst($task->status) }}</div>
+                                            <span class="text-danger">{{ ucfirst($task->status) }}</span>
                                         @endif
                                     </td>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-sm">View</a>
+                                    <td class="d-flex gap-1">
+                                        <a href="#" class="btn btn-info btn-sm" title="View">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
                                         @if ($task->status === 'pending')
-                                            <a href="" class="btn btn-success btn-sm">Mark as Done</a>
+                                            <a href="#" class="btn btn-success btn-sm" title="Mark as Done">
+                                                <i class="bi bi-check-circle"></i>
+                                            </a>
                                         @elseif ($task->status === 'done')
-                                            <a href="" class="btn btn-warning btn-sm">Mark as Pending</a>
+                                            <a href="#" class="btn btn-warning btn-sm" title="Mark as Pending">
+                                                <i class="bi bi-arrow-counterclockwise"></i>
+                                            </a>
                                         @endif
-                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
-                                        <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-warning btn-sm"
+                                            title="Edit">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a>
+                                        <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Are you sure?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm" title="Delete" type="submit">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -90,15 +109,4 @@
             </div>
         </section>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var toastEl = document.getElementById('toast-success');
-            if (toastEl) {
-                var toast = new bootstrap.Toast(toastEl, {
-                    delay: 3000
-                });
-                toast.show();
-            }
-        });
-    </script>
 @endsection
