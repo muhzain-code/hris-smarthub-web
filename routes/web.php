@@ -1,15 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+//Employees
+Route::resource('/employees', EmployeeController::class);
+// tasks
 Route::resource('/tasks', TaskController::class);
 Route::get('/tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done');
 Route::get('/tasks/pending/{id}', [TaskController::class, 'pending'])->name('tasks.pending');
