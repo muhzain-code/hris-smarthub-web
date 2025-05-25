@@ -76,7 +76,7 @@
                                         @endif
                                     </td>
                                     <td class="d-flex gap-1">
-                                        <a href="#" class="btn btn-info btn-sm" title="View">
+                                        <a href="{{ route('tasks.show', $task->id) }}" class="btn btn-info btn-sm" title="View">
                                             <i class="bi bi-eye"></i>
                                         </a>
                                         @if ($task->status === 'pending')
