@@ -27,10 +27,12 @@
         <section class="section">
             <div class="card">
                 <div class="card-body">
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
                     <form action="{{ route('presences.update', $presence->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-
                         <div class="mb-3">
                             <label for="employee_id" class="form-label">Employee</label>
                             <select name="employee_id" id="employee_id"
@@ -90,8 +92,8 @@
 
                         <div class="mb-3">
                             <label for="date" class="form-label">Date</label>
-                            <input type="date" value="{{ old('date', $presence->date) }}" name="date"
-                                id="date" class="form-control date  @error('date') is-invalid @enderror">
+                            <input type="date" value="{{ old('date', $presence->date) }}" name="date" id="date"
+                                class="form-control date  @error('date') is-invalid @enderror">
                             @error('date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

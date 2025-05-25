@@ -17,7 +17,7 @@
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('tasks.index') }}">Employees</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('employees.index') }}">Employees</a></li>
                         <li class="breadcrumb-item active" aria-current="page">View</li>
                     </ol>
                 </nav>
@@ -84,7 +84,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('tasks.index') }}" class="btn btn-secondary mt-3">
+                <a href="{{ route('employees.index') }}" class="btn btn-secondary mt-3">
                     <i class="bi bi-arrow-left"></i> Back to List
                 </a>
             </div>

@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.dashboard');
 
 @section('content')
     <header class="mb-3">
@@ -11,14 +11,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Create presence</h3>
-                    <p class="text-subtitle text-muted">Create new presence.</p>
+                    <h3>Edit payroll</h3>
+                    <p class="text-subtitle text-muted">Edit new payroll.</p>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('presences.index') }}">Presences</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">New Presence</li>
+                            <li class="breadcrumb-item"><a href="{{ route('payrolls.index') }}">Payrolls</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Edit Payroll</li>
                         </ol>
                     </nav>
                 </div>
@@ -27,8 +27,12 @@
         <section class="section">
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('presences.store') }}" method="POST">
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+                    <form action="{{ route('payrolls.update', $payroll->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="mb-3">
                             <label for="employee_id" class="form-label">Employee</label>
                             <select name="employee_id" id="employee_id"
@@ -37,7 +41,7 @@
                                     Employee</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}"
-                                        {{ old('employee_id') == $employee->id ? 'selected' : '' }}>
+                                        {{ old('employee_id', $payroll->employee_id) == $employee->id ? 'selected' : '' }}>
                                         {{ $employee->fullname }}</option>
                                 @endforeach
                             </select>
@@ -47,53 +51,48 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="check_in" class="form-label">Check In</label>
-                            <input type="datetime-local" value="{{ old('check_in') }}" name="check_in" id="check_in"
-                                class="form-control datetime  @error('check_in') is-invalid @enderror">
-                            @error('check_in')
+                            <label for="salary" class="form-label">Salary</label>
+                            <input type="number" value="{{ old('salary', $payroll->salary) }}"
+                                class="form-control @error('salary') is-invalid @enderror" name="salary" min="0"
+                                step="0.01" placeholder="e.g. 500000">
+                            @error('salary')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="check_out" class="form-label">Check Out</label>
-                            <input type="datetime-local" value="{{ old('check_out') }}" name="check_out" id="check_out"
-                                class="form-control datetime  @error('check_out') is-invalid @enderror">
-                            @error('check_out')
+                            <label for="bonuses" class="form-label">Bonuses</label>
+                            <input type="number" value="{{ old('bonuses', $payroll->bonuses) }}"
+                                class="form-control @error('bonuses') is-invalid @enderror" name="bonuses" min="0"
+                                step="0.01" placeholder="e.g. 500000">
+                            @error('bonuses')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="deductions" class="form-label">Deductions</label>
+                            <input type="number" value="{{ old('deductions', $payroll->deductions) }}"
+                                class="form-control @error('deductions') is-invalid @enderror" name="deductions"
+                                min="0" step="0.01" placeholder="e.g. 500000">
+                            @error('deductions')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="date" class="form-label">Date</label>
-                            <input type="date" value="{{ old('date') }}" name="date" id="date"
-                                class="form-control date  @error('date') is-invalid @enderror">
-                            @error('date')
+                            <label for="pay_date" class="form-label">Pay Date</label>
+                            <input type="datetime-local" value="{{ old('pay_date', $payroll->pay_date) }}" name="pay_date" id="pay_date"
+                                class="form-control datetime @error('pay_date') is-invalid @enderror">
+                            @error('pay_date')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
-                        <div class="mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select name="status" id="status"
-                                class="form-control @error('status') is-invalid @enderror">
-                                <option value="present" {{ old('status') == 'present' ? 'selected' : '' }}>Present</option>
-                                <option value="absent" {{ old('status') == 'absent' ? 'selected' : '' }}>Absent</option>
-                                <option value="sick" {{ old('status') == 'sick' ? 'selected' : '' }}>Sick</option>
-                                <option value="leave" {{ old('status') == 'leave' ? 'selected' : '' }}>Leave</option>
-                                <option value="late" {{ old('status') == 'late' ? 'selected' : '' }}>Late</option>
-                            </select>
-                            @error('status')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
                         <div class="d-flex justify-content-between mt-4">
-                            <a href="{{ route('presences.index') }}" class="btn btn-secondary me-2">
+                            <a href="{{ route('payrolls.index') }}" class="btn btn-secondary me-2">
                                 <i class="bi bi-arrow-left"></i> Back to List
                             </a>
                             <button type="submit" class="btn btn-primary">
-                                Create Presence
+                                Update Payroll
                             </button>
                         </div>
                     </form>

@@ -50,7 +50,8 @@
                         <div class="mb-3">
                             <label for="phone_number" class="form-label">Phone Number</label>
                             <input type="tel" value="{{ old('phone_number') }}" name="phone_number" id="phone_number"
-                                pattern="^\+62\d{9,13}$" placeholder="+62XXXXXXXXXX" class="form-control @error('phone_number') is-invalid @enderror">
+                                 placeholder="08xxxxxxxxxx"
+                                class="form-control @error('phone_number') is-invalid @enderror">
                             @error('phone_number')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -101,7 +102,8 @@
 
                         <div class="mb-3">
                             <label for="role_id">Role</label>
-                            <select name="role_id" id="role_id" class="form-control @error('role_id') is-invalid @enderror"
+                            <select name="role_id" id="role_id"
+                                class="form-control @error('role_id') is-invalid @enderror"
                                 @error('role_id') is-invalid @enderror>
                                 <option value="" {{ old('role_Id') ? '' : 'selected' }}>Select role</option>
                                 @foreach ($roles as $role)
@@ -116,8 +118,9 @@
 
                         <div class="mb-3">
                             <label for="salary" class="form-label">Salary</label>
-                            <input type="number" value="{{ old('salary') }}" class="form-control @error('salary') is-invalid @enderror" name="salary" min="0" step="0.01"
-                                placeholder="e.g. 5000000">
+                            <input type="number" value="{{ old('salary') }}"
+                                class="form-control @error('salary') is-invalid @enderror" name="salary" min="0"
+                                step="0.01" placeholder="e.g. 5000000">
                             @error('salary')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

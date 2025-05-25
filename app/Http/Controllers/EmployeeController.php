@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class EmployeeController extends Controller
 {
@@ -27,8 +28,13 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             'fullname' => 'required|string|max:255',
-            'email' => 'required|email|unique:employees,email',
-            'phone_number' => ['required', 'string', 'max:15', 'regex:/^\+?[0-9\s\-]{7,15}$/'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('employees', 'email')->whereNull('deleted_at'),
+            ],
+
+            'phone_number' => ['required', 'string', 'max:15'],
             'address' => 'nullable|string|max:255',
             'birth_date' => 'nullable|date|before_or_equal:today',
             'hire_date' => 'required|date|before_or_equal:today',
@@ -59,8 +65,14 @@ class EmployeeController extends Controller
     {
         $validated = $request->validate([
             'fullname' => 'required|string|max:255',
-            'email' => 'required|email|unique:employees,email,' . $employee->id,
-            'phone_number' => ['required', 'string', 'max:15', 'regex:/^\+?[0-9\s\-]{7,15}$/'],
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('employees', 'email')
+                    ->ignore($employee->id)
+                    ->whereNull('deleted_at'),
+            ],
+            'phone_number' => ['required', 'string', 'max:15'],
             'address' => 'nullable|string|max:255',
             'birth_date' => 'nullable|date|before_or_equal:today',
             'hire_date' => 'required|date|before_or_equal:today',

@@ -27,10 +27,15 @@ class PresencesController extends Controller
             'employee_id' => 'required|exists:employees,id',
             'check_in' => 'required|date|before_or_equal:check_out',
             'check_out' => 'nullable|date|after_or_equal:check_in',
-            'date' => 'required|date|before_or_equal:today',
+            'date' => 'required|date',
             'status' => 'required|string|in:present,absent,leave,sick,late',
         ]);
 
+        if (date('Y-m-d', strtotime($validated['check_in'])) !== date('Y-m-d', strtotime($validated['date']))) {
+            return back()
+                ->withInput()
+                ->withErrors(['date' => 'The date must be the same as the date part of check_in.']);
+        }
 
         Presence::create($validated);
 
@@ -55,10 +60,15 @@ class PresencesController extends Controller
             'employee_id' => 'required|exists:employees,id',
             'check_in' => 'required|date|before_or_equal:check_out',
             'check_out' => 'nullable|date|after_or_equal:check_in',
-            'date' => 'required|date|before_or_equal:today',
+            'date' => 'required|date',
             'status' => 'required|string|in:present,absent,leave,sick,late',
         ]);
 
+        if (date('Y-m-d', strtotime($validated['check_in'])) !== date('Y-m-d', strtotime($validated['date']))) {
+            return back()
+                ->withInput()
+                ->withErrors(['date' => 'The date must be the same as the date part of check_in.']);
+        }
 
         $presence->update($validated);
 

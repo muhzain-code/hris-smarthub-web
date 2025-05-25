@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
@@ -22,7 +22,7 @@ return new class extends Migration
         Schema::create('departments', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('status');
             $table->softDeletes();
             $table->timestamps();
@@ -31,7 +31,7 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('fullname');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('phone_number');
             $table->text('address');
             $table->date('birth_date');
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
             $table->foreignId('role_id')->constrained('roles')->onDelete('cascade');
             $table->string('status');
-            $table->decimal('salary', 10, 2);
+            $table->decimal('salary', 12, 2);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -48,7 +48,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('assigned_to')->constrained('employees')->onDelete('cascade');
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->datetime('due_date');
             $table->string('status');
             $table->softDeletes();
@@ -57,11 +57,11 @@ return new class extends Migration
 
         Schema::create('payrolls', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
-            $table->decimal('salary', 10, 2);
-            $table->decimal('bonuses', 10, 2);
-            $table->decimal('deductions', 10, 2);
-            $table->decimal('net_salary', 10, 2);
+            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
+            $table->decimal('salary', 12, 2);
+            $table->decimal('bonuses', 12, 2)->default(0);
+            $table->decimal('deductions', 12, 2)->default(0);
+            $table->decimal('net_pay', 12, 2);
             $table->datetime('pay_date');
             $table->softDeletes();
             $table->timestamps();
@@ -71,7 +71,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
             $table->datetime('check_in');
-            $table->datetime('check_out');
+            $table->datetime('check_out')->nullable();
             $table->date('date');
             $table->string('status');
             $table->softDeletes();
