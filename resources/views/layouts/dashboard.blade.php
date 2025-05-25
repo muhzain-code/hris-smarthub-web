@@ -81,7 +81,7 @@
 
                         <li class="sidebar-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                             <a href="{{ route('dashboard') }}" class='sidebar-link'>
-                                <i class="bi bi-grid-fill"></i>
+                                <i class="bi bi-check-circle-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
@@ -146,7 +146,6 @@
                 </div>
             </div>
         </div>
-
         <div id="main">
 
             @yield('content')
@@ -165,11 +164,7 @@
                     </div>
                 </div>
             </footer>
-
-
-
         </div>
-
     </div>
     <script src="{{ asset('mazer/dist/assets/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('mazer/dist/assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
