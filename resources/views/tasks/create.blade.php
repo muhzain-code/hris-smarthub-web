@@ -50,7 +50,7 @@
                             <label for="assigned_to" class="form-label">Assigned To</label>
                             <select name="assigned_to" id="assigned_to"
                                 class="form-control @error('assigned_to') is-invalid @enderror">
-                                <option value="" disabled {{ old('assigned_to') ? '' : 'selected'}}>Select an
+                                <option value="" {{ old('assigned_to') ? '' : 'selected'}}>Select an
                                     Employee</option>
                                 @foreach ($employees as $employee)
                                     <option value="{{ $employee->id }}"

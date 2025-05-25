@@ -80,11 +80,13 @@
                                             <i class="bi bi-eye"></i>
                                         </a>
                                         @if ($task->status === 'pending')
-                                            <a href="#" class="btn btn-success btn-sm" title="Mark as Done">
+                                            <a href="{{ route('tasks.done', $task->id) }}" class="btn btn-success btn-sm"
+                                                title="Mark as Done">
                                                 <i class="bi bi-check-circle"></i>
                                             </a>
                                         @elseif ($task->status === 'done')
-                                            <a href="#" class="btn btn-warning btn-sm" title="Mark as Pending">
+                                            <a href="{{ route('tasks.pending', $task->id) }}" class="btn btn-warning btn-sm"
+                                                title="Mark as Pending">
                                                 <i class="bi bi-arrow-counterclockwise"></i>
                                             </a>
                                         @endif
@@ -93,10 +95,10 @@
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
                                         <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
-                                            class="d-inline" onsubmit="return confirm('Are you sure?')">
+                                            class="d-inline delete-form">
                                             @csrf
                                             @method('DELETE')
-                                            <button class="btn btn-danger btn-sm" title="Delete" type="submit">
+                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Task">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </form>
