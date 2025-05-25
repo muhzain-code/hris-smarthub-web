@@ -49,7 +49,7 @@ return new class extends Migration
             $table->foreignId('assigned_to')->constrained('employees')->onDelete('cascade');
             $table->string('title');
             $table->text('description');
-            $table->date('due_date');
+            $table->datetime('due_date');
             $table->string('status');
             $table->softDeletes();
             $table->timestamps();
@@ -62,7 +62,7 @@ return new class extends Migration
             $table->decimal('bonuses', 10, 2);
             $table->decimal('deductions', 10, 2);
             $table->decimal('net_salary', 10, 2);
-            $table->date('pay_date');
+            $table->datetime('pay_date');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -70,8 +70,8 @@ return new class extends Migration
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained('employees')->onDelete('cascade');
-            $table->date('check_in');
-            $table->date('check_out');
+            $table->datetime('check_in');
+            $table->datetime('check_out');
             $table->date('date');
             $table->string('status');
             $table->softDeletes();
