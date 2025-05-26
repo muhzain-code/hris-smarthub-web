@@ -27,7 +27,7 @@ Route::resource('/presences', PresencesController::class);
 
 Route::resource('/payrolls', PayrollController::class);
 
-Route::resource('/leaves', LeaveRequestController::class);
+Route::resource('/leave-requests', LeaveRequestController::class);
 
 
 Route::resource('/tasks', TaskController::class);

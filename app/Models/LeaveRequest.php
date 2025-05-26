@@ -9,4 +9,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class LeaveRequest extends Model
 {
      use HasFactory, SoftDeletes;
+
+     protected $fillable = [
+          'employee_id',
+          'leave_type',
+          'start_date',
+          'end_date',
+          'status',
+     ];
+
+     public function employee()
+     {
+          return $this->belongsTo(Employee::class);
+     }
 }

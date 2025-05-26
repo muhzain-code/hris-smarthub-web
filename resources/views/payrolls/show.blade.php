@@ -32,7 +32,7 @@
                         <div class="alert alert-danger">{{ session('error') }}</div>
                     @endif
 
-                    <div class="row">
+                    <div class="row" id="print-area">
                         <div class="col-md-6 mb-3">
                             <label class="form-label"><strong>Employee</strong></label>
                             <p>{{ $payroll->employee->fullname }}</p>
@@ -40,22 +40,22 @@
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label"><strong>Salary</strong></label>
-                            <p>{{ $payroll->salary }}</p>
+                            <p>Rp {{ number_format($payroll->salary, 0, ',', '.') }}</p>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label"><strong>Bonuses</strong></label>
-                            <p>{{ $payroll->bonuses }}</p>
+                            <p>Rp {{ number_format($payroll->bonuses, 0, ',', '.') }}</p>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label"><strong>Deductions</strong></label>
-                            <p>{{ $payroll->deductions }}</p>
+                            <p>Rp {{ number_format($payroll->deductions, 0, ',', '.') }}</p>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label"><strong>Net Pay</strong></label>
-                            <p>{{ $payroll->net_pay }}</p>
+                            <p>Rp {{ number_format($payroll->net_pay, 0, ',', '.') }}</p>
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -64,11 +64,29 @@
                         </div>
                     </div>
 
-                    <a href="{{ route('payrolls.index') }}" class="btn btn-secondary mt-3">
-                        <i class="bi bi-arrow-left"></i> Back to List
-                    </a>
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ route('payrolls.index') }}" class="btn btn-secondary me-2">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                        <button type="submit" class="btn btn-primary" id="btn-print"><span
+                                class="bi bi-printer">Print</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </section>
     </div>
+
+    <script>
+        document.getElementById('btn-print').addEventListener('click', function() {
+            let printContent = document.getElementById('print-area').innerHTML
+            let originalContent = document.body.innerHTML
+
+            document.body.innerHTML = printContent
+
+            window.print()
+            document.body.innerHTML = originalContent
+        })
+    </script>
 @endsection
