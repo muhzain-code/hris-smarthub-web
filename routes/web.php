@@ -12,27 +12,29 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LeaveRequestController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Akses khusus untuk HR Manager
+Route::middleware(['role:HR'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('/departments', DepartmentController::class);
+    Route::resource('/departments', DepartmentController::class);
+    Route::resource('/roles', RoleController::class);
+    Route::resource('/employees', EmployeeController::class);
+});
 
-Route::resource('/roles', RoleController::class);
+// Akses umum keperluan sistem oleh semua role
+Route::middleware(['role:HR,Developer,Sales,Finance'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('/presences', PresencesController::class);
+    Route::resource('/payrolls', PayrollController::class);
+    Route::resource('/leave-requests', LeaveRequestController::class);
+    Route::resource('/tasks', TaskController::class);
 
-Route::resource('/employees', EmployeeController::class);
-
-Route::resource('/presences', PresencesController::class);
-
-Route::resource('/payrolls', PayrollController::class);
-
-Route::resource('/leave-requests', LeaveRequestController::class);
-
-
-Route::resource('/tasks', TaskController::class);
-Route::get('/tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done');
-Route::get('/tasks/pending/{id}', [TaskController::class, 'pending'])->name('tasks.pending');
+    Route::get('/tasks/done/{id}', [TaskController::class, 'done'])->name('tasks.done');
+    Route::get('/tasks/pending/{id}', [TaskController::class, 'pending'])->name('tasks.pending');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

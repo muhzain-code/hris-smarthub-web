@@ -83,6 +83,8 @@
                             $currentRoute = Route::currentRouteName();
                         @endphp
 
+                        @if(session('role') === 'HR')
+
                         <li class="sidebar-item {{ Str::startsWith($currentRoute, 'dashboard') ? 'active' : '' }}">
                             <a href="{{ route('dashboard') }}" class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
@@ -132,12 +134,55 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'leave-requests.') ? 'active' : '' }}">
+                        <li
+                            class="sidebar-item {{ Str::startsWith($currentRoute, 'leave-requests.') ? 'active' : '' }}">
                             <a href="{{ route('leave-requests.index') }}" class="sidebar-link">
                                 <i class="bi bi-shift-fill"></i>
                                 <span>Leave Request</span>
                             </a>
                         </li>
+
+                        @endif()
+
+                        @if(in_array(session('role'), ['Developer', 'Sales', 'Finance']))
+                        
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('dashboard') }}" class="sidebar-link">
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'tasks.') ? 'active' : '' }}">
+                            <a href="{{ route('tasks.index') }}" class="sidebar-link">
+                                <i class="bi bi-check-circle-fill"></i>
+                                <span>Tasks</span>
+                            </a>
+                        </li>
+
+                           <li class="sidebar-item {{ Str::startsWith($currentRoute, 'presences.') ? 'active' : '' }}">
+                            <a href="{{ route('presences.index') }}" class="sidebar-link">
+                                <i class="bi bi-table"></i>
+                                <span>Presences</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item {{ Str::startsWith($currentRoute, 'payrolls.') ? 'active' : '' }}">
+                            <a href="{{ route('payrolls.index') }}" class="sidebar-link">
+                                <i class="bi bi-currency-dollar"></i>
+                                <span>Payrolls</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="sidebar-item {{ Str::startsWith($currentRoute, 'leave-requests.') ? 'active' : '' }}">
+                            <a href="{{ route('leave-requests.index') }}" class="sidebar-link">
+                                <i class="bi bi-shift-fill"></i>
+                                <span>Leave Request</span>
+                            </a>
+                        </li>
+
+                        @endif()
 
                         <li class="sidebar-item">
                             <a href="{{ route('logout') }}" class="sidebar-link"
@@ -211,7 +256,6 @@
             });
         });
     </script>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
